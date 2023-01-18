@@ -1,0 +1,14 @@
+const express = require('express')
+const exphbs = require('express-handlebars').create({
+      extname: '.hbs'
+})
+
+const app = express()
+
+app.engine('.hbs', exphbs.engine)
+app.set('view engine', '.hbs')
+
+app.use(express.urlencoded({extended: true}))
+app.use('/static', express.static('static'))
+
+app.listen(3000, ()=>console.log('Server is running ...'))
