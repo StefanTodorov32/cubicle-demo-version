@@ -1,14 +1,26 @@
-const express = require('express')
-const exphbs = require('express-handlebars').create({
-      extname: '.hbs'
-})
+const express = require("express");
+const exphbs = require("express-handlebars").create({
+  extname: ".hbs",
+});
 
-const app = express()
+const catalogControllers = require("./controllers/catalogControllers");
+const createController = require("./controllers/createControllers")
+const detailesController = require('./controllers/detailesController')
+const notFound = require("./controllers/notFound");
 
-app.engine('.hbs', exphbs.engine)
-app.set('view engine', '.hbs')
+const app = express();
 
-app.use(express.urlencoded({extended: true}))
-app.use('/static', express.static('static'))
+app.engine(".hbs", exphbs.engine);
+app.set("view engine", ".hbs");
 
-app.listen(3000, ()=>console.log('Server is running ...'))
+app.use(express.urlencoded({ extended: true }));
+app.use("/static", express.static("static"));
+
+app.use('/create', createController)
+app.use(catalogControllers)
+app.use(detailesController)
+
+
+
+app.all('*', notFound)
+app.listen(3000, () => console.log("Server is running ..."));

@@ -1,0 +1,16 @@
+[
+      {
+            "id": "1",
+            "name": "First Cube",
+            "description": "This is the first cube",
+            "image": "https://guide-images.cdn.ifixit.com/igi/hulYfOgpBDcRmgwa.large",
+            "difficulty": "1"
+      },
+      {
+            "id": "2",
+            "name": "Second Cube",
+            "description": "This is the second cube",
+            "image": "https://images.squarespace-cdn.com/content/v1/5943b11db3db2be040e6fa54/1584863714543-FYTYZ2VAEUYI83GTLYAL/rubik%27s+cube.jpg?format=500w",
+            "difficulty": "2"
+      }
+]
