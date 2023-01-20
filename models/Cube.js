@@ -13,5 +13,6 @@ class Cube {
     const jsonData = JSON.stringify(dataDB, null, 2)
     fs.writeFileSync(path.resolve(__dirname, '../models/data.json'), jsonData)
   }
+  
 }
 module.exports = Cube

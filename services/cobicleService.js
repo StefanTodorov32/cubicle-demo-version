@@ -1,5 +1,5 @@
 const fs = require("fs");
-
+const cubeDB = require('../models/data.json')
 const path = "./models/data.json";
 const data = JSON.parse(fs.readFileSync(path));
 
@@ -20,7 +20,17 @@ async function persist(){
             })
       })
 }
+function getSearchCube(searchTerm,fromDiff, toDiff){
+      const result =  cubeDB.filter(cubes => cubes.name.toLowerCase().includes(searchTerm))
+      if (result.difficultyLevel >toDiff || result.difficultyLevel < fromDiff) {
+            return
+      }else{
+            console.log(result)
+            return result
+      }
+}
 module.exports ={
       getCubeById,
-      getCubes
+      getCubes,
+      getSearchCube
 }
