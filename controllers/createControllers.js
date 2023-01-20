@@ -4,6 +4,7 @@ router.get('/', (req, res)=>{
       res.render('create')
 })
 router.post('/', (req,res)=>{
+      req.body.difficultyLevel = Number(req.body.difficultyLevel)
       let cube = new Cube(req.body)
       console.log(req.body);
       Cube.save(cube)
