@@ -15,7 +15,7 @@ app.set("view engine", ".hbs");
 
 app.use(express.urlencoded({ extended: true }));
 app.use("/static", express.static("static"));
-
+app.use(express.urlencoded({extended:false}))
 app.use('/create', createController)
 app.use(catalogControllers)
 app.use(detailesController)
