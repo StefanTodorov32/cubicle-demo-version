@@ -22,9 +22,7 @@ async function persist() {
 }
 function getSearchCube(searchTerm, fromDiff, toDiff) {
   fromDiff = isNaN(fromDiff) ? fromDiff : 0
-  console.log("🚀 ~ file: cobicleService.js:25 ~ getSearchCube ~ fromDiff", fromDiff)
   toDiff = isNaN(toDiff) ? toDiff : 10
-  console.log("🚀 ~ file: cobicleService.js:26 ~ getSearchCube ~ toDiff", toDiff)
   const result = cubeDB.filter((cubes) => {
     if (
       cubes.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
