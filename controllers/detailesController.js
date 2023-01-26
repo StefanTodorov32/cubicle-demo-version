@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const { getCubeById } = require("../services/cobicleService");
 
-router.get("/details/:id", (req, res) => {
+router.get("/", (req, res) => {
   const id = req.params.id;
   const data = getCubeById(id);
   if (data) {
