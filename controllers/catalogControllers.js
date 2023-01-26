@@ -7,9 +7,7 @@ router.get("/", (req, res) => {
   res.render("catalog", {cubes});
 });
 
-router.get("/about", (req, res) => {
-  res.render("about");
-});
+
 
 router.post('/', (req, res)=>{
   const {search, from , to} = req.body
