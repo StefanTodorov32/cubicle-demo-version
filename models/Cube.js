@@ -1,18 +1,29 @@
-const dataDB = require('../models/data')
-const fs = require('fs')
-const path = require('path')
-class Cube {
-  constructor(name, description, image, difficulty) {
-    this.name = name;
-    this.image = image;
-    this.difficulty = difficulty;
-    this.description = description;
-  }
-  static save(cube){
-    dataDB.push(cube.name)
-    const jsonData = JSON.stringify(dataDB, null, 2)
-    fs.writeFileSync(path.resolve(__dirname, '../models/data.json'), jsonData)
-  }
-  
-}
+const mongoose = require("mongoose");
+const { Schema, model } = require("mongoose");
+
+const cubeSchema = new Schema({
+    name: {
+        type: String,
+        required: true,
+    },
+    description: {
+        type: String,
+        required: true,
+        maxLength: 50,
+    },
+    imageUrl: {
+        type: String,
+        require: true,
+    },
+    difficultyLevel: {
+        type: Number,
+        require: true,
+        max: 6,
+        min: 1,
+    },
+//     accessories: {},
+});
+
+const Cube = model('Cube', cubeSchema)
+
 module.exports = Cube

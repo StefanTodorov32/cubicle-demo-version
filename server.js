@@ -25,8 +25,10 @@ app.use("/details/:id", detailesController);
 
 app.all("*", notFound);
 
-initDb().then(
-    app.listen(3002, () =>
-        console.log("Server is running on http://localhost:3002...")
+initDb()
+    .then(
+        app.listen(3002, () =>
+            console.log("Server is running on http://localhost:3002...")
+        )
     )
-).catch((err)=>console.error(err))
+    .catch((err) => console.error(err));

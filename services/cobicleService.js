@@ -1,41 +1,9 @@
-const fs = require("fs");
-const cubeDB = require("../models/data.json");
-const path = "./models/data.json";
-const data = JSON.parse(fs.readFileSync(path));
+const Cube = require("../models/Cube");
 
-function getCubes() {
-  return data;
-}
-function getCubeById(id) {
-  return data.find((i) => i.id == id);
-}
-async function persist() {
-  return new Promise((res, rej) => {
-    fs.writeFile(path, JSON.stringify(data), (err) => {
-      if (err == null) {
-        res();
-      } else {
-        rej(err);
-      }
-    });
-  });
-}
-function getSearchCube(searchTerm, fromDiff, toDiff) {
-  fromDiff = isNaN(fromDiff) ? fromDiff : 0
-  toDiff = isNaN(toDiff) ? toDiff : 10
-  const result = cubeDB.filter((cubes) => {
-    if (
-      cubes.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-      cubes.difficultyLevel >= Number(fromDiff) &&
-      cubes.difficultyLevel <= Number(toDiff)
-    ) {
-      return cubes
-    }
-  });
-  return result;
-}
-module.exports = {
-  getCubeById,
-  getCubes,
-  getSearchCube,
+const createCube = async (req, res) => {
+    const { name, description, imageUrl, difficultyLevel } = req.body;
+    let cube = new Cube({ name, description, imageUrl, difficultyLevel });
+    await cube.save();
+    res.redirect("/");
 };
+module.exports = { createCube };
