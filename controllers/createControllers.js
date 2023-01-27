@@ -1,16 +1,19 @@
-const { createCube } = require("../services/cobicleService");
+const { createAccessory, getAttachAccessory } = require("../services/accessoryService");
+const { createCube } = require("../services/cubeService");
 
 const router = require("express").Router();
 
+// Cube Routes
 router.get("/cube", (req, res) => {
     res.render("create");
 });
+router.post("/cube", createCube);
+
+// Accessory Routes
 router.get("/accessory", (req, res) => {
     res.render("createAccessory");
 });
-router.get("/accessory/:id", (req, res) => {
-    res.render("attachAccessory");
-});
-router.post("/cube", createCube);
+router.post("/accessory", createAccessory);
+router.get("/accessory/:id", getAttachAccessory);
 
 module.exports = router;
