@@ -21,7 +21,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/create", createController);
 app.use("/", catalogControllers);
 app.use("/about", aboutController);
-app.use("/details/:id", detailesController);
+app.use("/details", detailesController);
 
 app.all("*", notFound);
 
