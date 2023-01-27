@@ -2,7 +2,7 @@ const { createCube } = require("../services/cobicleService");
 
 const router = require("express").Router();
 
-router.get("/", (req, res) => {
+router.get("/cube", (req, res) => {
     res.render("create");
 });
 router.get("/accessory", (req, res) => {
@@ -11,6 +11,6 @@ router.get("/accessory", (req, res) => {
 router.get("/accessory/:id", (req, res) => {
     res.render("attachAccessory");
 });
-router.post("/", createCube);
+router.post("/cube", createCube);
 
 module.exports = router;
