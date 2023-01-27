@@ -6,4 +6,8 @@ const createCube = async (req, res) => {
     await cube.save();
     res.redirect("/");
 };
-module.exports = { createCube };
+const getCubes = async (req, res) => {
+    let cubes = await Cube.find().lean();
+    res.render("catalog", { cubes });
+};
+module.exports = { createCube, getCubes };
