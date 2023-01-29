@@ -1,4 +1,8 @@
-const { createAccessory, getAttachAccessory } = require("../services/accessoryService");
+const {
+    createAccessory,
+    getAttachAccessory,
+    postAttachAccessory,
+} = require("../services/accessoryService");
 const { createCube } = require("../services/cubeService");
 
 const router = require("express").Router();
@@ -15,5 +19,6 @@ router.get("/accessory", (req, res) => {
 });
 router.post("/accessory", createAccessory);
 router.get("/accessory/:id", getAttachAccessory);
+router.post("/accessory/attach/:id", postAttachAccessory);
 
 module.exports = router;

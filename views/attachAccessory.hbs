@@ -14,7 +14,7 @@
             <div class="form">
                 <h2>{{cube.name}}</h2>
                 <img class="cube" src="{{cube.imageUrl}}">
-                <form action="/create/accessory/{{_id}}" method="POST">
+                <form action="/create/accessory/attach/{{cube._id}}" method="POST">
                     <label for="accessory">Accessories</label>
                     <select id="accessory" name="accessory" />
                     {{#each accessories}}

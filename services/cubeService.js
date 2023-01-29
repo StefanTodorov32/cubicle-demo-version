@@ -12,7 +12,7 @@ const getCubes = async (req, res) => {
 };
 const getCubeById = async(req, res)=>{
   const cubeId = req.params.id
-  let cube = await Cube.findById(cubeId).lean()
+  let cube = await Cube.findById(cubeId).populate('accessories').lean()
   res.render("details", {cube})
 }
 

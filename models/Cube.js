@@ -21,9 +21,14 @@ const cubeSchema = new Schema({
         max: 6,
         min: 1,
     },
-//     accessories: {},
+    accessories: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Accessory",
+        },
+    ],
 });
 
-const Cube = model('Cube', cubeSchema)
+const Cube = model("Cube", cubeSchema);
 
-module.exports = Cube
+module.exports = Cube;
