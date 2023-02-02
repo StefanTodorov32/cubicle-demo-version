@@ -2,33 +2,29 @@ const express = require("express");
 const exphbs = require("express-handlebars").create({
     extname: ".hbs",
 });
-
-const catalogControllers = require("./controllers/catalogControllers");
-const createController = require("./controllers/createControllers");
-const detailesController = require("./controllers/detailesController");
-const aboutController = require("./controllers/aboutControllers");
-const notFound = require("./controllers/notFound");
+const routesConfig = require('./config/routes')
+const cookieParser = require('cookie-parser')
 const initDb = require("./config/db");
+const auth = require('./middlewares/auth')
 
-const app = express();
+const jwtSecret = "asdasdasdkajsdja";
 
-app.engine(".hbs", exphbs.engine);
-app.set("view engine", ".hbs");
 
-app.use("/static", express.static("static"));
-app.use(express.urlencoded({ extended: true }));
+async function start() {
+    const app = express();
 
-app.use("/create", createController);
-app.use("/", catalogControllers);
-app.use("/about", aboutController);
-app.use("/details", detailesController);
+    await initDb()
+    app.engine(".hbs", exphbs.engine);
+    app.set("view engine", ".hbs");
 
-app.all("*", notFound);
+    app.use(express.urlencoded({ extended: true }));
+    app.use("/static", express.static("static"));
+    app.use(cookieParser());
+    app.use(auth(jwtSecret))
+    routesConfig(app)
 
-initDb()
-    .then(
-        app.listen(3002, () =>
-            console.log("Server is running on http://localhost:3002...")
-        )
-    )
-    .catch((err) => console.error(err));
+    app.listen(3002, ()=> console.log('Server running on http://localhost:3002'))
+
+}
+
+start()

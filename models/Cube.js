@@ -27,6 +27,10 @@ const cubeSchema = new Schema({
             ref: "Accessory",
         },
     ],
+    creatorId: { 
+        type: String,
+        required: true
+     },
 });
 
 const Cube = model("Cube", cubeSchema);
