@@ -8,6 +8,8 @@ async function authentecation(req, res, next) {
       const decodedToken = await jwt.verify(token, config.secret);
       req.user = decodedToken;
       req.isAuthenticated = true
+      res.locals.username = decodedToken.username
+      res.locals.isAuthenticated = true
     } catch (e) {
       console.error(e);
       res.clearCookie("auth");
