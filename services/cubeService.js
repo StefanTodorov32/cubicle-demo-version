@@ -25,9 +25,18 @@ const getCubeById = async (req, res) => {
   let cube = await Cube.findById(cubeId).populate("accessories").lean();
   res.render("details", { cube });
 };
-const getOneCube = async (cubeId) =>{
-  const cube = await Cube.findById(cubeId).lean()
-  return cube
-}
+const getOneCube = async (cubeId) => {
+  const cube = await Cube.findById(cubeId).lean();
+  return cube;
+};
+const updateCube = async (cubeId, data) => Cube.findByIdAndUpdate(cubeId, data);
 
-module.exports = { createCube, getCubes, getCubeById, getOneCube };
+const deleteCube = async (cubeId) => Cube.findByIdAndDelete(cubeId);
+module.exports = {
+  createCube,
+  getCubes,
+  getCubeById,
+  getOneCube,
+  deleteCube,
+  updateCube,
+};

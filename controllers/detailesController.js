@@ -1,5 +1,10 @@
 const router = require("express").Router();
-const { getCubeById, getOneCube } = require("../services/cubeService");
+const {
+  getCubeById,
+  getOneCube,
+  updateCube,
+  deleteCube,
+} = require("../services/cubeService");
 
 function generatedDifficultyLevel(currentLevel) {
   const difficulty = [
@@ -23,9 +28,23 @@ router.get("/:id/edit", async (req, res) => {
   const difficultyLevels = generatedDifficultyLevel(cube.difficultyLevel);
   res.render("editCube", { cube, difficultyLevels });
 });
+router.post("/:id/edit", async (req, res) => {
+  const { name, description, imageUrl, difficultyLevel } = req.body;
+  await updateCube(req.params.id, {
+    name,
+    description,
+    imageUrl,
+    difficultyLevel,
+  });
+  res.redirect(`/details/${req.params.id}`);
+});
 router.get("/:id/delete", async (req, res) => {
   const cube = await getOneCube(req.params.id);
   const difficultyLevels = generatedDifficultyLevel(cube.difficultyLevel);
   res.render("deleteCube", { cube, difficultyLevels });
 });
+router.post("/:id/delete", async(req, res)=>{
+    await deleteCube(req.params.id)
+    res.redirect('/')
+})
 module.exports = router;
