@@ -1,5 +1,6 @@
-const jwt = require("jsonwebtoken");
+const jwtFunctions = require("../lib/jwt");
 const User = require("../models/User");
+const config = require('../config/indexes');
 
 const getUserByUsername = (username) => User.findOne({ username });
 
@@ -18,8 +19,11 @@ const login = async ({ username, password }) => {
     if (!isValid) {
         throw new Error("Invalid Password/Username")
     }
-
-    return user;
+    const payload = {
+        username : user.username
+    }
+    const token = await jwtFunctions.sign(payload,  config.secret, {expiresIn: '4h'})
+    return token
 };
 
 module.exports = { register, getUserByUsername, login };

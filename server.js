@@ -7,7 +7,7 @@ const cookieParser = require('cookie-parser')
 const initDb = require("./config/db");
 const auth = require('./middlewares/auth')
 
-const jwtSecret = "asdasdasdkajsdja";
+const config = require('./config/indexes');
 
 
 async function start() {
@@ -20,7 +20,7 @@ async function start() {
     app.use(express.urlencoded({ extended: true }));
     app.use("/static", express.static("static"));
     app.use(cookieParser());
-    app.use(auth(jwtSecret))
+    app.use(auth(config.secret))
     routesConfig(app)
 
     app.listen(3002, ()=> console.log('Server running on http://localhost:3002'))
