@@ -2,18 +2,7 @@ const Cube = require("../models/Cube");
 const jwt = require('../lib/jwt')
 const config = require('../config/indexes')
 const createCube = async (req, res) => {
-    const token = req.cookies['auth']
-
-    if (!token) {
-      return res.redirect('/404')
-    }
-    try{
-      const decodedToken = await jwt.verify(token, config.secret)
-      
-    }catch(e){
-      return res.redirect('/404')
-    }
-
+    
     const { name, description, imageUrl, difficultyLevel } = req.body;
     let cube = new Cube({ name, description, imageUrl, difficultyLevel });
     await cube.save();

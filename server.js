@@ -20,7 +20,7 @@ async function start() {
     app.use(express.urlencoded({ extended: true }));
     app.use("/static", express.static("static"));
     app.use(cookieParser());
-    app.use(auth(config.secret))
+    app.use(auth.authentecation)
     routesConfig(app)
 
     app.listen(3002, ()=> console.log('Server running on http://localhost:3002'))

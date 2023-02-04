@@ -1,7 +1,7 @@
 const {
-    createAccessory,
-    getAttachAccessory,
-    postAttachAccessory,
+  createAccessory,
+  getAttachAccessory,
+  postAttachAccessory,
 } = require("../services/accessoryService");
 const { createCube } = require("../services/cubeService");
 
@@ -9,13 +9,13 @@ const router = require("express").Router();
 
 // Cube Routes
 router.get("/cube", (req, res) => {
-    res.render("create");
+  res.render("create");
 });
 router.post("/cube", createCube);
 
 // Accessory Routes
 router.get("/accessory", (req, res) => {
-    res.render("createAccessory");
+  res.render("createAccessory");
 });
 router.post("/accessory", createAccessory);
 router.get("/accessory/:id", getAttachAccessory);

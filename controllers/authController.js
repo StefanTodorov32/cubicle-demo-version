@@ -11,7 +11,8 @@ router.post('/login', async (req, res)=>{
     const {username, password} = req.body
     try{
 
-        const result = await login({username, password})
+        const token = await login({username, password})
+        res.cookie('auth', token)
     }catch(e){
         console.error(e)
         return res.redirect('/auth/login')

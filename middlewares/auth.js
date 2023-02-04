@@ -1,21 +1,24 @@
-const jwt = require("jsonwebtoken");
+const jwt = require("../lib/jwt");
+const config = require("../config/indexes");
 
-
-module.exports = (jwtSecret) => (req, res, next) => {
-    const token = req.cookies.jwt;
-    if (token) {
-        try {
-            const data = jwt.verify(token, jwtSecret);
-            req.user = data
-        } catch (e) {
-            res.clearCookie('jwt')
-            return res.redirect("/login");
-        }
+async function authentecation(req, res, next) {
+  const token = req.cookies["auth"];
+  if (token) {
+    try {
+      const decodedToken = await jwt.verify(token, config.secret);
+      req.user = decodedToken;
+      req.isAuthenticated = true
+    } catch (e) {
+      console.error(e);
+      res.clearCookie("auth");
+      res.redirect("/404");
     }
-
-    req.signJwt = (data) => jwt.sign(data, jwtSecret, {
-        expiresIn: '4h'
-    })
-
-    next();
-};
+  }
+  next();
+}
+function isAuthenticated(req, res, next){
+    if (!req.isAuthenticated) {
+        res.redirect('/login')
+    }
+}
+module.exports = { authentecation,isAuthenticated };
